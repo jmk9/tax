@@ -1,0 +1,10 @@
+{
+  "tax_year": 2025,
+  "filing_year": 2026,
+  "status": "not_started",
+  "filing_open_notified": false,
+  "d7_notified": false,
+  "d1_notified": false,
+  "late_filing_notified": true,
+  "completed_at": null
+}
