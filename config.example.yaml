@@ -1,0 +1,22 @@
+# config.yaml 로 복사 후 수정
+user:
+  email: user@example.com
+  timezone: Asia/Seoul
+
+smtp:
+  host: smtp.gmail.com
+  port: 465
+  username: user@example.com   # 발신 Gmail 주소
+  # 비밀번호는 저장하지 않는다. 환경변수 SMTP_PASSWORD 에 Gmail 앱 비밀번호 설정.
+
+tax_profile:
+  country: KR
+  income_type:
+    - freelance_business_income
+  withholding_3_3: true
+
+notification:
+  filing_open: true
+  deadline_7_days: true
+  deadline_1_day: true
+  late_filing_check: true
