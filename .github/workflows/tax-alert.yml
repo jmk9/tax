@@ -25,8 +25,8 @@ jobs:
       # GMAIL_SENDER: 발신 Gmail (생략 시 ALERT_EMAIL의 첫 번째 주소 사용)
       - name: Generate config
         env:
-          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
-          GMAIL_SENDER: ${{ secrets.GMAIL_SENDER }}
+          ALERT_EMAIL: ${{ vars.ALERT_EMAIL || secrets.ALERT_EMAIL }}
+          GMAIL_SENDER: ${{ vars.GMAIL_SENDER || secrets.GMAIL_SENDER }}
         run: |
           SENDER="${GMAIL_SENDER:-${ALERT_EMAIL%%,*}}"
           sed -e "s/user@example.com/$ALERT_EMAIL/" \
