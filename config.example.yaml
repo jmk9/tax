@@ -1,12 +1,12 @@
 # config.yaml 로 복사 후 수정
 user:
-  email: user@example.com
+  email: user@example.com      # 수신자. 여러 명이면 쉼표로: a@x.com,b@y.com
   timezone: Asia/Seoul
 
 smtp:
   host: smtp.gmail.com
   port: 465
-  username: user@example.com   # 발신 Gmail 주소
+  username: sender@example.com # 발신 Gmail 주소 (앱 비밀번호 발급 계정, 1개)
   # 비밀번호는 저장하지 않는다. 환경변수 SMTP_PASSWORD 에 Gmail 앱 비밀번호 설정.
 
 tax_profile:

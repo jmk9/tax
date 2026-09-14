@@ -20,11 +20,18 @@ jobs:
 
       - run: pip install pyyaml
 
-      # 개인 이메일은 repo에 커밋하지 않고 Secrets에서 주입
+      # 개인 이메일은 repo에 커밋하지 않고 Secrets에서 주입.
+      # ALERT_EMAIL: 수신자 (쉼표로 여러 명 가능)
+      # GMAIL_SENDER: 발신 Gmail (생략 시 ALERT_EMAIL의 첫 번째 주소 사용)
       - name: Generate config
         env:
           ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
-        run: sed "s/user@example.com/$ALERT_EMAIL/g" config.example.yaml > config.yaml
+          GMAIL_SENDER: ${{ secrets.GMAIL_SENDER }}
+        run: |
+          SENDER="${GMAIL_SENDER:-${ALERT_EMAIL%%,*}}"
+          sed -e "s/user@example.com/$ALERT_EMAIL/" \
+              -e "s/sender@example.com/$SENDER/" \
+              config.example.yaml > config.yaml
 
       - name: Run agent
         env:

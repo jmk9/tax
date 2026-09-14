@@ -42,7 +42,8 @@ repo Settings → Secrets and variables → Actions 에 등록:
 | Secret | 값 |
 |---|---|
 | `SMTP_PASSWORD` | Gmail 앱 비밀번호 |
-| `ALERT_EMAIL` | 수신·발신 Gmail 주소 |
+| `ALERT_EMAIL` | 수신자. 여러 명이면 쉼표로: `a@x.com,b@y.com` |
+| `GMAIL_SENDER` | (선택) 발신 Gmail. 생략 시 `ALERT_EMAIL` 첫 번째 주소 사용 |
 
 config.yaml은 개인정보 노출 방지로 커밋하지 않고, workflow가
 config.example.yaml + `ALERT_EMAIL`로 매 실행마다 생성한다.
