@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: '0 0 * * *'   # 00:00 UTC = 09:00 KST 매일
   workflow_dispatch:       # 수동 실행용
+    inputs:
+      test_today:
+        description: '테스트용 날짜 YYYY-MM-DD (예: 2026-05-01 → 신고시작 메일 발송). state 저장 안 함'
+        required: false
 
 permissions:
   contents: write          # state 커밋용
@@ -36,7 +40,14 @@ jobs:
       - name: Run agent
         env:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
-        run: python -m tax_agent.cli run
+          TEST_TODAY: ${{ inputs.test_today }}
+        run: |
+          if [ -n "$TEST_TODAY" ]; then
+            # 테스트: 지정 날짜로 실발송, state는 임시 디렉토리 (커밋 안 됨)
+            python -m tax_agent.cli --state-dir /tmp/test-state run --today "$TEST_TODAY"
+          else
+            python -m tax_agent.cli run
+          fi
 
       - name: Persist state
         run: |
